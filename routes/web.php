@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+include(base_path('routes/auth.php'));
+include(base_path('routes/admin.php'));
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('client.layouts.app');
 });
 
 Route::get('/dashboard', function () {
@@ -28,4 +30,3 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
