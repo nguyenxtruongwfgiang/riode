@@ -4,17 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Models\Permission as ModelsPermission;
 
-class Category extends Model
+class Permission extends ModelsPermission
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'description'
+        'display_name',
+        'group',
+        'guard_name'
     ];
-
-    public function product() {
-        return $this->hasMany(Product::class);
-    }
 }
