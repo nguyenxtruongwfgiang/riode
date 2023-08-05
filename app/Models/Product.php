@@ -13,10 +13,15 @@ class Product extends Model
         'name',
         'price',
         'image',
-        'category_id'
+        'category_id',
+        'color_id'
     ];
 
     public function category() {
         return $this->belongsTo(Category::class);
+    }
+
+    public function colors() {
+        return $this->belongsToMany(Color::class, 'product_colors', 'product_id', 'color_id');
     }
 }

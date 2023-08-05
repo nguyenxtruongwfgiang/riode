@@ -1,9 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('client.layouts.app');
-});
-
-?>
+Route::get('/', 'DashboardController@index');

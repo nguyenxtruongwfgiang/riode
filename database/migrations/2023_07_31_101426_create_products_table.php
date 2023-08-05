@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('name', 100);
             $table->integer('price');
             $table->string('image', 200)->nullable();
-            $table->smallInteger('sale')->default(0);
+            $table->smallInteger('sale')->default(0)->nullable();
+            $table->integer('quantity')->default(0);
             $table->foreignId('category_id');
+            $table->integer('color_id')->nullable();
             $table->timestamps();
         });
     }
