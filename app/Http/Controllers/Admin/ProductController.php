@@ -114,6 +114,7 @@ class ProductController extends Controller
     {
         try {
             $product->delete();
+            $product->colors()->delete();
 
             delete_file($product->image);
             return back()
