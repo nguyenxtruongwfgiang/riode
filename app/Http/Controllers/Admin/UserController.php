@@ -110,6 +110,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+        $user->roles()->delete();
 
         return back()
             ->with('message', 'User Deleted Successfully');

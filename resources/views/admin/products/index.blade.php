@@ -40,6 +40,7 @@
                                     <th> Image </th>
                                     <th> Sale </th>
                                     <th> Category </th>
+                                    <th> Quantity </th>
                                     <th> Actions </th>
                                 </tr>
                             </thead>
@@ -52,6 +53,7 @@
                                         <td><img width="80px" src="{{ asset($product->image) }}" alt=""></td>
                                         <td>{{ $product->sale }}</td>
                                         <td>{{ $product->category->name }}</td>
+                                        <td>{{ $product->quantity }}</td>
                                         <td>
                                             <form action="{{ route('admin.products.destroy', $product->id) }}"
                                                 method="POST">
