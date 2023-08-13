@@ -16,7 +16,7 @@
                                 <li class="breadcrumb-item active">Create New Product</li>
                             </ol>
                         </div>
-                        <h4 class="page-title"><a href="{{ route('products.index') }}">Back To Product List</a></h4>
+                        <h4 class="page-title"><a href="{{ route('admin.products.index') }}">Back To Product List</a></h4>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -32,7 +32,7 @@
                                 <h6 class="headr-tile text-danger">{{ session('message') }}</h6>
                             @endif
 
-                            <form class="form-group" action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+                            <form class="form-group" action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group mb-0">
                                     <label class="mb-2 pb-1">Name</label>

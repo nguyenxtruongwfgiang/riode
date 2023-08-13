@@ -6,11 +6,11 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->as('admin.')->group(function () {
 
-    // Route::get('/', function () {
-    //     return view('admin.layouts.app');
-    // });
+    Route::get('/', function () {
+        return view('admin.dashboard.index');
+    })->name('dashboard');
 
     Route::get('/dashboard', function () {
         return view('admin.dashboard.index');

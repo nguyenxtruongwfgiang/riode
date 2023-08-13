@@ -614,3 +614,23 @@
 
     </div> <!-- Page content Wrapper -->
 @endsection
+
+@push('styles')
+    <link href="{{ asset('be/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet">
+    <link href="{{ asset('be/assets/plugins/fullcalendar/vanillaCalendar.css') }}" rel="stylesheet" type="text/css" />
+
+    <link href="{{ asset('be/assets/plugins/morris/morris.css') }}" rel="stylesheet">
+@endpush
+
+@push('scripts')
+    <script src="{{ asset('be/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js') }}"></script>
+    <script src="{{ asset('be/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+
+    <script src="{{ asset('be/assets/plugins/skycons/skycons.min.js') }}"></script>
+    <script src="{{ asset('be/assets/plugins/fullcalendar/vanillaCalendar.js') }}"></script>
+
+    <script src="{{ asset('be/assets/plugins/raphael/raphael-min.js') }}"></script>
+    <script src="{{ asset('be/assets/plugins/morris/morris.min.js') }}"></script>
+
+    <script src="{{ asset('be/assets/pages/dashborad.js') }}"></script>
+@endpush

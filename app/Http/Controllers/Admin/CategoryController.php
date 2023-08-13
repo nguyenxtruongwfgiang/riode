@@ -42,7 +42,7 @@ class CategoryController extends Controller
             $category->save();
 
             return redirect()
-                ->route('categories.index')
+                ->route('admin.categories.index')
                 ->with(['message' => 'Category Created Successfully']);
         } catch (\Exception $exception) {
             Log::error('CategoryController@store', [$exception->getMessage()]);
@@ -81,7 +81,7 @@ class CategoryController extends Controller
             $category->save();
 
             return redirect()
-                ->route('categories.index')
+                ->route('admin.categories.index')
                 ->with(['message' => 'Category Updated Successfully']);
         } catch (\Exception $exception) {
             Log::error('CategoryController@store', [$exception->getMessage()]);

@@ -47,7 +47,7 @@ class UserController extends Controller
             $user->roles()->attach($attributes['role_ids']);
 
             return redirect()
-                ->route('users.index')
+                ->route('admin.users.index')
                 ->with(['message' => 'User Created Successfully']);
         } catch (\Exception $exception) {
             Log::error('UserController@store', [$exception->getMessage()]);
@@ -87,13 +87,13 @@ class UserController extends Controller
             if($request->password) {
                 $attributes['password'] = Hash::make($request->password);
             }
-        
+
             $user->fill($attributes);
             $user->save();
             $user->roles()->sync($attributes['role_ids']);
 
             return redirect()
-                ->route('users.index')
+                ->route('admin.users.index')
                 ->with(['message' => 'User Updated Successfully']);
         } catch (\Exception $exception) {
             Log::error('UserController@update', [$exception->getMessage()]);

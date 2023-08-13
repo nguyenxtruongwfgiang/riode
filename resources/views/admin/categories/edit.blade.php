@@ -16,7 +16,7 @@
                                 <li class="breadcrumb-item active">Update Category</li>
                             </ol>
                         </div>
-                        <h4 class="page-title"><a href="{{ route('categories.index') }}">Back To Category List</a></h4>
+                        <h4 class="page-title"><a href="{{ route('admin.categories.index') }}">Back To Category List</a></h4>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -32,7 +32,7 @@
                                 <h6 class="headr-tile text-danger">{{ session('message') }}</h6>
                             @endif
 
-                            <form class="form-group" action="{{ route('categories.update', $category->id) }}" method="POST">
+                            <form class="form-group" action="{{ route('admin.categories.update', $category->id) }}" method="POST">
                                 @method('PUT')
                                 @csrf
                                 <div class="form-group mb-0">
