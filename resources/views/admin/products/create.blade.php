@@ -97,7 +97,7 @@
                                                     <div class="form-check">
                                                         <input type="checkbox" class="form-check-input" name="colors[]"
                                                             value="{{ $color->id }}">
-                                                        <label for="custom-control-label">{{ $color->name }}</label>
+                                                        <label for="custom-control-label">{{ $color->display_name }}</label>
                                                     </div>
                                                 </div>
                                             </div>

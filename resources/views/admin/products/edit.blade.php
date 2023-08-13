@@ -105,7 +105,7 @@
                                                         <input type="checkbox" class="form-check-input" name="colors[]"
                                                             {{ $product->colors->contains('id', $color->id) ? 'checked' : '' }}
                                                             value="{{ $color->id }}">
-                                                        <label for="custom-control-label">{{ $color->name }}</label>
+                                                        <label for="custom-control-label">{{ $color->display_name }}</label>
                                                     </div>
                                                 </div>
                                             </div>
