@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Product;
@@ -43,13 +44,13 @@ class ProductController extends Controller
             $product->fill($attributes);
 
             if ($request->hasFile('image')) {
-                $product->image = upload_file('students', $request->file('image'));
+                $product->image = upload_file('products', $request->file('image'));
             }
 
             $product->save();
             $product->colors()->attach($attributes['colors']);
 
-            return redirect()->route('products.index')
+            return redirect()->route('admin.products.index')
                 ->with(['message' => 'Product Created Successfully']);
         } catch (\Exception $exception) {
             Log::error('ProductController@store: ', [$exception->getMessage()]);
@@ -81,22 +82,22 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
         $attributes = $request->except('image');
         try {
             $product->fill($attributes);
-            $oldProductImage = $product->image;
+            $productCurrentImage = $product->image;
 
             if ($request->hasFile('image')) {
-                $product->image = upload_file('students', $request->file('image'));
+                $product->image = upload_file('products', $request->file('image'));
+                delete_file($productCurrentImage);
             }
 
             $product->save();
-            delete_file($oldProductImage);
             $product->colors()->sync($attributes['colors']);
 
-            return redirect()->route('products.index')
+            return redirect()->route('admin.products.index')
                 ->with(['message' => 'Product Updated Successfully']);
         } catch (\Exception $exception) {
             Log::error('ProductController@update: ', [$exception->getMessage()]);
@@ -111,9 +112,16 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->delete();
+        try {
+            $product->delete();
 
-        return back()
-            ->with('message', 'Product Deleted Successfully');
+            delete_file($product->image);
+            return back()
+                ->with('message', 'Product Deleted Successfully');
+        } catch (\Exception $exception) {
+            Log::error('ProductController@destroy: ', [$exception->getMessage()]);
+
+            return back()->with('message', 'Product Delete Failed');
+        }
     }
 }

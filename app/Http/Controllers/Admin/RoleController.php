@@ -44,7 +44,7 @@ class RoleController extends Controller
             $role->permissions()->attach($attributes['permission_ids']);
 
             return redirect()
-                ->route('roles.index')
+                ->route('admin.roles.index')
                 ->with(['message' => 'Role Created Successfuly']);
         } catch (\Exception $exception) {
             Log::error('Exception', [$exception]);
@@ -86,7 +86,7 @@ class RoleController extends Controller
             $role->permissions()->sync($attributes['permission_ids']);
 
             return redirect()
-                ->route('roles.index')
+                ->route('admin.roles.index')
                 ->with(['message' => 'Role Updated Successfuly']);
         } catch (\Exception $exception) {
             Log::error('Exception', [$exception]);
@@ -105,7 +105,7 @@ class RoleController extends Controller
         $role->delete();
 
         return redirect()
-            ->route('roles.index')
+            ->route('admin.roles.index')
             ->with(['message' => 'Role Deleted Successfuly']);
     }
 }

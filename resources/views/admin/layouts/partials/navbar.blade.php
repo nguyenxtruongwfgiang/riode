@@ -8,8 +8,8 @@
     <div class="topbar-left">
         <div class="text-center">
             <!--<a href="index.html" class="logo"><i class="mdi mdi-assistant"></i>Zoter</a>-->
-            <a href="index.html" class="logo">
-                <img src="assets/images/logo-lg.png" alt="" class="logo-large">
+            <a href="{{ route('admin.dashboard') }}" class="logo">
+                <img src="{{ asset('be/assets/images/logo-lg.png') }}" alt="" class="logo-large">
             </a>
         </div>
     </div>
@@ -32,8 +32,8 @@
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-layers"></i> <span> Role
                         </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                     <ul class="list-unstyled">
-                        <li><a href="{{ route('roles.index') }}">All Role</a></li>
-                        <li><a href="{{ route('roles.create') }}">Create Role</a></li>
+                        <li><a href="{{ route('admin.roles.index') }}">All Role</a></li>
+                        <li><a href="{{ route('admin.roles.create') }}">Create Role</a></li>
                     </ul>
                 </li>
 
@@ -41,8 +41,8 @@
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-bullseye"></i> <span>
                             User</span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                     <ul class="list-unstyled">
-                        <li><a href="{{ route('users.index') }}">All Users</a></li>
-                        <li><a href="{{ route('users.create') }}">Create New User</a></li>
+                        <li><a href="{{ route('admin.users.index') }}">All Users</a></li>
+                        <li><a href="{{ route('admin.users.create') }}">Create New User</a></li>
                     </ul>
                 </li>
 
@@ -50,8 +50,8 @@
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard-outline"></i><span>
                             Categories </span> <span class="badge badge-pill badge-info float-right">8</span></a>
                     <ul class="list-unstyled">
-                        <li><a href="{{ route('categories.index') }}">All Categories</a></li>
-                        <li><a href="{{ route('categories.create') }}">Create New Category</a></li>
+                        <li><a href="{{ route('admin.categories.index') }}">All Categories</a></li>
+                        <li><a href="{{ route('admin.categories.create') }}">Create New Category</a></li>
                     </ul>
                 </li>
 
@@ -59,8 +59,8 @@
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-gauge"></i><span> Products
                         </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                     <ul class="list-unstyled">
-                        <li><a href="{{ route('products.index') }}">All Products</a></li>
-                        <li><a href="{{ route('products.create') }}">Add New Product</a></li>
+                        <li><a href="{{ route('admin.products.index') }}">All Products</a></li>
+                        <li><a href="{{ route('admin.products.create') }}">Add New Product</a></li>
                     </ul>
                 </li>
 

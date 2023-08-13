@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Update Role' . $role->name)
+@section('title', 'Update Role ' . $role->display_name)
 @section('content')
     <div class="page-content-wrapper ">
 
@@ -16,7 +16,7 @@
                                 <li class="breadcrumb-item active">Create New Role</li>
                             </ol>
                         </div>
-                        <h4 class="page-title"><a href="{{ route('roles.index') }}">Back To Role List</a></h4>
+                        <h4 class="page-title"><a href="{{ route('admin.roles.index') }}">Back To Role List</a></h4>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -33,7 +33,7 @@
                                 <h4 class="headr-tile text-danger">{{ session('message') }}</h4>
                             @endif
 
-                            <form class="" action="{{ route('roles.update', $role->id) }}" method="POST">
+                            <form class="" action="{{ route('admin.roles.update', $role->id) }}" method="POST">
                                 @method('PUT')
                                 @csrf
                                 <div class="form-group mb-0">

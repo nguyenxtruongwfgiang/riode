@@ -16,7 +16,7 @@
                                 <li class="breadcrumb-item active">Create New User</li>
                             </ol>
                         </div>
-                        <h4 class="page-title"><a href="{{ route('users.index') }}">Back To User List</a></h4>
+                        <h4 class="page-title"><a href="{{ route('admin.users.index') }}">Back To User List</a></h4>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -32,7 +32,7 @@
                                 <h6 class="headr-tile text-danger">{{ session('message') }}</h6>
                             @endif
 
-                            <form class="form-group" action="{{ route('users.store') }}" method="POST">
+                            <form class="form-group" action="{{ route('admin.users.store') }}" method="POST">
                                 @csrf
                                 <div class="form-group mb-0">
                                     <label class="mb-2 pb-1">Name</label>

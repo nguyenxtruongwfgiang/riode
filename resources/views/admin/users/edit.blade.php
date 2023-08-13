@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Update User' . $user->name)
+@section('title', 'Update User ' . $user->name)
 @section('content')
     <div class="page-content-wrapper ">
 
@@ -16,7 +16,7 @@
                                 <li class="breadcrumb-item active">Update User</li>
                             </ol>
                         </div>
-                        <h4 class="page-title"><a href="{{ route('users.index') }}">Back To User List</a></h4>
+                        <h4 class="page-title"><a href="{{ route('admin.users.index') }}">Back To User List</a></h4>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -29,7 +29,7 @@
 
                             <h4 class="mt-0 header-title">Update User</h4>
 
-                            <form class="form-group" action="{{ route('users.update', $user->id) }}" method="POST">
+                            <form class="form-group" action="{{ route('admin.users.update', $user->id) }}" method="POST">
                                 @method('PUT')
                                 @csrf
                                 <div class="form-group mb-0">
