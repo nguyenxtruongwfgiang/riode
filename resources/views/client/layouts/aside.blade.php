@@ -10,34 +10,14 @@
                 <a href="#" class="filter-clean">Clean All</a>
             </div>
             <div class="widget widget-collapsible">
-                <h3 class="widget-title">All Categories</h3>
+                <h3 class="widget-title">All Brand</h3>
                 <ul class="widget-body filter-items search-ul">
-                    <li><a href="#">Accessosries</a></li>
-                    <li>
-                        <a href="#">Bags</a>
-                        <ul>
-                            <li><a href="#">Backpacks & Fashion Bags</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Electronics</a>
-                        <ul>
-                            <li><a href="#">Computer</a></li>
-                            <li><a href="#">Gaming & Accessosries</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">For Fitness</a></li>
-                    <li><a href="#">Home & Kitchen</a></li>
-                    <li><a href="#">Men's</a></li>
-                    <li><a href="#">Shoes</a></li>
-                    <li><a href="#">Sporting Goods</a></li>
-                    <li><a href="#">Summer Season's</a></li>
-                    <li><a href="#">Travel & Clothing</a></li>
-                    <li><a href="#">Watches</a></li>
-                    <li><a href="#">Women’s</a></li>
+                    @foreach ($categories as $category)
+                        <li><a href="#">{{ $category->name }}</a></li>
+                    @endforeach
                 </ul>
             </div>
-            <div class="widget widget-collapsible">
+            {{-- <div class="widget widget-collapsible">
                 <h3 class="widget-title">Filter by Price</h3>
                 <div class="widget-body mt-3">
                     <form action="#">
@@ -51,33 +31,13 @@
                         </div>
                     </form>
                 </div>
-            </div>
-            <div class="widget widget-collapsible">
-                <h3 class="widget-title">Size</h3>
-                <ul class="widget-body filter-items">
-                    <li><a href="#">Extra Large</a></li>
-                    <li><a href="#">Large</a></li>
-                    <li><a href="#">Medium</a></li>
-                    <li><a href="#">Small</a></li>
-                </ul>
-            </div>
+            </div> --}}
             <div class="widget widget-collapsible">
                 <h3 class="widget-title">Color</h3>
                 <ul class="widget-body filter-items">
-                    <li><a href="#">Black</a></li>
-                    <li><a href="#">Blue</a></li>
-                    <li><a href="#">Green</a></li>
-                    <li><a href="#">White</a></li>
-                </ul>
-            </div>
-            <div class="widget widget-collapsible">
-                <h3 class="widget-title">Brands</h3>
-                <ul class="widget-body filter-items">
-                    <li><a href="#">Cinderella</a></li>
-                    <li><a href="#">Comedy</a></li>
-                    <li><a href="#">Rightcheck</a></li>
-                    <li><a href="#">SkillStar</a></li>
-                    <li><a href="#">SLS</a></li>
+                    @foreach ($colors as $color)
+                        <li><a href="#">{{ $color->display_name }}</a></li>
+                    @endforeach
                 </ul>
             </div>
         </div>

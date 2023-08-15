@@ -44,7 +44,7 @@
                     <a href="#" class="mobile-menu-toggle">
                         <i class="d-icon-bars2"></i>
                     </a>
-                    <a href="demo1.html" class="logo">
+                    <a href="{{ route('client.dashboard') }}" class="logo">
                         <img src="{{ asset('client/images/logo.png') }}" alt="logo" width="153" height="44" />
                     </a>
 
@@ -233,7 +233,7 @@
                     <nav class="main-nav">
                         <ul class="menu">
                             <li>
-                                <a href="demo1.html">Home</a>
+                                <a href="{{ route('client.dashboard') }}">Home</a>
                             </li>
                             <li class="active">
                                 <a href="shop.html">Categories</a>
@@ -305,7 +305,7 @@
                                         <div
                                             class="col-6 col-sm-4 col-md-4 col-lg-3 menu-banner menu-banner1 banner banner-fixed">
                                             <figure>
-                                                <img src="images/menu/banner-1.jpg" alt="Menu banner" width="221"
+                                                <img src="{{ asset('client/images/menu/banner-1.jpg') }}" alt="Menu banner" width="221"
                                                     height="330" />
                                             </figure>
                                             <div class="banner-content y-50">
@@ -381,7 +381,7 @@
                                         <div
                                             class="col-6 col-sm-4 col-md-3 menu-banner menu-banner2 banner banner-fixed">
                                             <figure>
-                                                <img src="images/menu/banner-2.jpg" alt="Menu banner" width="221"
+                                                <img src="{{ asset('client/images/menu/banner-2.jpg') }}" alt="Menu banner" width="221"
                                                     height="330" />
                                             </figure>
                                             <div class="banner-content x-50 text-center">

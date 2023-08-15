@@ -147,7 +147,7 @@
                 </figure>
             </div>
             <div class="footer-center">
-                <p class="copyright">Riode eCommerce &copy; 2022. All Rights Reserved</p>
+                <p class="copyright">Riode &copy; {{ now()->year }}. All Rights Reserved</p>
             </div>
             <div class="footer-right">
                 <div class="social-links">
