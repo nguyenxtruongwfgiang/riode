@@ -65,11 +65,11 @@
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-cards-outline"></i> <span>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-format-color-fill"></i> <span>
                             Product Attributes </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                     <ul class="list-unstyled">
-                        <li><a href="#">All Attributes</a></li>
-                        <li><a href="#">Add New Attribute</a></li>
+                        <li><a href="{{ route('admin.colors.index') }}">All Colors</a></li>
+                        <li><a href="{{ route('admin.colors.create') }}">Add New Color</a></li>
                     </ul>
                 </li>
 

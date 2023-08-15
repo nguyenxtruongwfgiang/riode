@@ -41,7 +41,7 @@
         <div class="product-wrap">
             <div class="product">
                 <figure class="product-media">
-                    <a href="product.html">
+                    <a href="#">
                         <img src="{{ asset($product->image) }}" alt="product" width="280" height="315">
                     </a>
                     <div class="product-action-vertical">
@@ -58,13 +58,13 @@
                 </figure>
                 <div class="product-details">
                     <div class="product-cat">
-                        <a href="shop-grid-4cols.html">Women’s</a>
+                        <a href="#">{{ $product->category->name }}</a>
                     </div>
                     <h3 class="product-name">
-                        <a href="product.html">Men's Fashion Jacket</a>
+                        <a href="#">{{ $product->name }}</a>
                     </h3>
                     <div class="product-price">
-                        <ins class="new-price">$98.00</ins><del class="old-price">$210.00</del>
+                        <ins class="new-price">{{ number_format($product->price) . 'đ' }}</ins><del class="old-price">$210.00</del>
                     </div>
                     <div class="ratings-container">
                         <div class="ratings-full">
@@ -78,7 +78,8 @@
         </div>
         @endforeach
     </div>
-    <nav class="toolbox toolbox-pagination">
+    {{ $products->links() }}
+    {{-- <nav class="toolbox toolbox-pagination">
         <p class="show-info">Showing 12 of 56 Products</p>
         <ul class="pagination">
             <li class="page-item disabled">
@@ -100,6 +101,6 @@
                 </a>
             </li>
         </ul>
-    </nav>
+    </nav> --}}
 </div>
 @endsection

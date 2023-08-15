@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             ColorSeeder::class,
             PermissionSeeder::class,
-            ProductSeeder::class,
             RoleSeeder::class
         ]);
     }
