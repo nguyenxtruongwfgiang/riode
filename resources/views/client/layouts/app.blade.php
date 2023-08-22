@@ -43,7 +43,6 @@
     <div class="page-content mb-10 pb-6">
         <div class="container">
             <div class="row gutter-lg main-content-wrap">
-                @include('client.layouts.aside')
 
                 @yield('content')
             </div>
@@ -132,7 +131,7 @@
     <script src="{{ asset('client/vendor/owl-carousel/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('client/vendor/nouislider/nouislider.min.js') }}"></script>
 
-    <script src="{{ asset('client/js/main.min.js') }}"></script>
+    <script src="{{ asset('client/js/main.js') }}"></script>
 </body>
 
 <!-- Mirrored from d-themes.com/html/riode/shop-grid-4cols.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 18 Jul 2023 15:27:04 GMT -->

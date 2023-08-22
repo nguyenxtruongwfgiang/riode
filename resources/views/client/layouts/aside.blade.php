@@ -10,10 +10,11 @@
                 <a href="#" class="filter-clean">Clean All</a>
             </div>
             <div class="widget widget-collapsible">
-                <h3 class="widget-title">All Brand</h3>
+                <h3 class="widget-title">Brands</h3>
                 <ul class="widget-body filter-items search-ul">
+                    <li><a href="{{ route('products.index') }}">All Brands</a></li>
                     @foreach ($categories as $category)
-                        <li><a href="#">{{ $category->name }}</a></li>
+                        <li class="active"><a href="/categories/{{ $category->id }}/products">{{ $category->name }}</a></li>
                     @endforeach
                 </ul>
             </div>

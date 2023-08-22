@@ -44,7 +44,7 @@
                     <a href="#" class="mobile-menu-toggle">
                         <i class="d-icon-bars2"></i>
                     </a>
-                    <a href="{{ route('client.dashboard') }}" class="logo">
+                    <a href="{{ route('dashboard') }}" class="logo">
                         <img src="{{ asset('client/images/logo.png') }}" alt="logo" width="153" height="44" />
                     </a>
 
@@ -233,7 +233,7 @@
                     <nav class="main-nav">
                         <ul class="menu">
                             <li>
-                                <a href="{{ route('client.dashboard') }}">Home</a>
+                                <a href="{{ route('dashboard') }}">Home</a>
                             </li>
                             <li class="active">
                                 <a href="shop.html">Categories</a>
@@ -546,15 +546,3 @@
     </header>
 
     <main class="main">
-        <div class="page-header"
-            style="background-image: url('images/shop/page-header-back.jpg'); background-color: #3C63A4;">
-            <h3 class="page-subtitle">Categories</h3>
-            <h1 class="page-title">4 Columns</h1>
-            <ul class="breadcrumb">
-                <li><a href="demo1.html"><i class="d-icon-home"></i></a></li>
-                <li class="delimiter">/</li>
-                <li><a href="shop.html">Categories</a></li>
-                <li class="delimiter">/</li>
-                <li>4 Columns</li>
-            </ul>
-        </div>
