@@ -38,7 +38,7 @@
                 </li>
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-bullseye"></i> <span>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi mdi-account"></i> <span>
                             User</span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                     <ul class="list-unstyled">
                         <li><a href="{{ route('admin.users.index') }}">All Users</a></li>
@@ -48,7 +48,7 @@
 
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard-outline"></i><span>
-                            Categories </span> <span class="badge badge-pill badge-info float-right">8</span></a>
+                            Categories </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></a>
                     <ul class="list-unstyled">
                         <li><a href="{{ route('admin.categories.index') }}">All Categories</a></li>
                         <li><a href="{{ route('admin.categories.create') }}">Create New Category</a></li>
@@ -70,6 +70,15 @@
                     <ul class="list-unstyled">
                         <li><a href="{{ route('admin.colors.index') }}">All Colors</a></li>
                         <li><a href="{{ route('admin.colors.create') }}">Add New Color</a></li>
+                    </ul>
+                </li>
+
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect"><i class="fas fa-ticket-alt"></i> <span>
+                            Coupons </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ route('admin.coupons.index') }}">Coupon List</a></li>
+                        <li><a href="{{ route('admin.coupons.create') }}">Create New Coupon</a></li>
                     </ul>
                 </li>
 
