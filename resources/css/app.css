@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.auth-logo{
+    width: 140px;
+}
+
+.ml-3 .login-btn {
+    background-color: #3C63A4 !important;
+}
