@@ -9,7 +9,7 @@
         <div class="text-center">
             <!--<a href="index.html" class="logo"><i class="mdi mdi-assistant"></i>Zoter</a>-->
             <a href="{{ route('admin.dashboard') }}" class="logo">
-                <img src="{{ asset('be/assets/images/logo-lg.png') }}" alt="" class="logo-large">
+                <img src="{{ asset('client/images/logo.png') }}" alt="" class="logo-large">
             </a>
         </div>
     </div>

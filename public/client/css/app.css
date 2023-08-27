@@ -1,0 +1,33 @@
+.product-color {
+    color: #625f5f;
+    border: 0.5px solid #ebebeb;
+    width: 100%;
+    padding: 0.8rem 3rem 0.8rem 0.8rem;
+    font-family: Poppins,sans-serif;
+    margin-bottom: 0.5rem;
+}
+
+.product-quantity {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 4.5rem;
+}
+
+.quantity{
+    text-align: center;
+    box-sizing: border-box;
+    height: 30px !important;
+    border: 0.5px solid #ebebeb;
+    width: 60%;
+    font-family: Poppins,sans-serif;
+    max-width: 100%;
+}
+
+.product-quantity .control{
+    width: 15%;
+    cursor: pointer;
+    text-align: center;
+}

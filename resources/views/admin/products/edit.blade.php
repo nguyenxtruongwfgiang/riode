@@ -110,10 +110,10 @@
                                                 </div>
                                             </div>
                                         @endforeach
-                                        @error('color_id')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
                                     </div>
+                                    @error('colors')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group mb-0">

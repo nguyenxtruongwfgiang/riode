@@ -11,7 +11,7 @@
         <meta content="Mannatthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <link rel="shortcut icon" href="{{ asset('be/assets/images/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('client/images/logo.png') }}">
 
         @stack('styles')
 
