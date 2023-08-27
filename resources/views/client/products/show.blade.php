@@ -90,7 +90,7 @@
                                     <select name="color" class="form-control">
                                         <option value selected="selected">Choose an Option</option>
                                         @foreach ($product->colors as $color)
-                                            <option style="color: {{ $color->value }}" value="{{ $color->id }}">{{ $color->display_name }}</option>
+                                            <option value="{{ $color->id }}">{{ $color->display_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

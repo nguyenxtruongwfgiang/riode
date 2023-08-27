@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -18,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 include(base_path('routes/auth.php'));
 include(base_path('routes/admin.php'));
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -35,4 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/categories/{category_id}/products', [ProductController::class, 'getProductByCategory']);
     Route::get('products/{product}', [ProductController::class, 'show'])->name('products.detail');
 // });
+Route::middleware('auth')->group(function() {
 
+    Route::post('cart/add/{product}', [CartController::class, 'store'])->name('cart.add');
+    Route::get('cart', [CartController::class, 'index'])->name('cart.index');
+});

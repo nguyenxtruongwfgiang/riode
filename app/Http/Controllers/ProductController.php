@@ -34,6 +34,7 @@ class ProductController extends Controller
     public function show(Product $product) {
         $relatedProducts =
         Product::where('category_id', $product->category_id)
+        ->where('id', '!=', $product->id)
         ->orderBy('created_at', 'desc')
         ->take(4)
         ->get();

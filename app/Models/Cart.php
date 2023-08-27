@@ -12,6 +12,20 @@ class Cart extends Model
     protected $fillable = [
         'user_id',
         'product_id',
-        'product_quantity'
+        'color_id',
+        'price',
+        'quantity'
     ];
+
+    public function product() {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function getAmountAttribute() {
+        return $this->quantity * $this->price;
+    }
+
+    public function color() {
+        return $this->belongsTo(Color::class);
+    }
 }
