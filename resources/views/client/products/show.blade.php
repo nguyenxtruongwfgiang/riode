@@ -1,9 +1,17 @@
 @extends('client.layouts.app')
 
+@section('title', $product->name)
 @section('content')
     <main class="main mt-6 single-product">
         <div class="page-content mb-10 pb-6">
             <div class="container">
+                @if (session('message'))
+                    <div class="alert alert-simple alert-btn" style="margin-bottom: 1rem">
+                        <a href="cart.html" class="btn btn-success btn-md">View Cart</a>
+                        <span>{{ session('message') }}</span>
+                        <button type="button" class="btn btn-link btn-close"><i class="d-icon-times"></i></button>
+                    </div>
+                @endif
                 <div class="product product-single row mb-7">
                     <div class="col-md-6 sticky-sidebar-wrapper">
                         <div class="product-gallery pg-vertical sticky-sidebar" data-sticky-options="{'minWidth': 767}">
@@ -43,89 +51,98 @@
                     </div>
                     <div class="col-md-6">
                         <div class="product-details">
-                            <div class="product-navigation">
-                                <ul class="breadcrumb breadcrumb-lg">
-                                    <li><a href="demo1.html"><i class="d-icon-home"></i></a></li>
-                                    <li><a href="{{ route('products.index') }}" class="active">Products</a></li>
-                                    <li>{{ $product->name }}</li>
-                                </ul>
-                                <ul class="product-nav">
-                                    <li class="product-nav-prev">
-                                        <a href="#">
-                                            <i class="d-icon-arrow-left"></i> Prev
-                                            <span class="product-nav-popup">
-                                                <img src="{{ asset('client/images/product/product-thumb-prev.jpg') }}"
-                                                    alt="product thumbnail" width="110" height="123">
-                                                <span class="product-name">{{ $product->name }}</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="product-nav-next">
-                                        <a href="#">
-                                            Next <i class="d-icon-arrow-right"></i>
-                                            <span class="product-nav-popup">
-                                                <img src="{{ asset('client/images/product/product-thumb-next.jpg') }}"
-                                                    alt="product thumbnail" width="110" height="123">
-                                                <span class="product-name">{{ $product->name }}</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h1 class="product-name">{{ $product->name }}</h1>
-                            <div class="product-meta">
-                                BRAND: <span class="product-brand">{{ $product->category->name }}</span>
-                            </div>
-                            <div class="product-price">{{ number_format($product->price) . 'đ' }}</div>
-                            <div class="ratings-container">
-                                <div class="ratings-full">
-                                    <span class="ratings" style="width:80%"></span>
-                                    <span class="tooltiptext tooltip-top"></span>
+                            <form action="{{ route('cart.add', $product->id) }}" method="post">
+                                @csrf
+                                <div class="product-navigation">
+                                    <ul class="breadcrumb breadcrumb-lg">
+                                        <li><a href="demo1.html"><i class="d-icon-home"></i></a></li>
+                                        <li><a href="{{ route('products.index') }}" class="active">Products</a></li>
+                                        <li>{{ $product->name }}</li>
+                                    </ul>
+                                    <ul class="product-nav">
+                                        <li class="product-nav-prev">
+                                            <a href="#">
+                                                <i class="d-icon-arrow-left"></i> Prev
+                                                <span class="product-nav-popup">
+                                                    <img src="{{ asset('client/images/product/product-thumb-prev.jpg') }}"
+                                                        alt="product thumbnail" width="110" height="123">
+                                                    <span class="product-name">{{ $product->name }}</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="product-nav-next">
+                                            <a href="#">
+                                                Next <i class="d-icon-arrow-right"></i>
+                                                <span class="product-nav-popup">
+                                                    <img src="{{ asset('client/images/product/product-thumb-next.jpg') }}"
+                                                        alt="product thumbnail" width="110" height="123">
+                                                    <span class="product-name">{{ $product->name }}</span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <a href="#product-tab-reviews" class="link-to-tab rating-reviews">( 11 reviews )</a>
-                            </div>
-                            <div class="product-form product-variations product-color">
-                                <label>Color:</label>
-                                <div class="select-box">
-                                    <select name="color" class="form-control">
-                                        <option value selected="selected">Choose an Option</option>
-                                        @foreach ($product->colors as $color)
-                                            <option value="{{ $color->id }}">{{ $color->display_name }}</option>
-                                        @endforeach
-                                    </select>
+                                <h1 class="product-name">{{ $product->name }}</h1>
+                                <div class="product-meta">
+                                    BRAND: <span class="product-brand">{{ $product->category->name }}</span>
                                 </div>
-                            </div>
-                            <div class="product-variation-price">
-                                <span>{{ number_format($product->price) . 'đ' }}</span>
-                            </div>
-                            <hr class="product-divider">
-                            <div class="product-form product-qty">
-                                <div class="product-form-group">
-                                    <div class="input-group mr-2">
-                                        <button class="quantity-minus d-icon-minus"></button>
-                                        <input class="quantity form-control" type="number" min="1" max="1000000">
-                                        <button class="quantity-plus d-icon-plus"></button>
+                                <div class="product-price">{{ number_format($product->price) . 'đ' }}</div>
+                                <div class="ratings-container">
+                                    <div class="ratings-full">
+                                        <span class="ratings" style="width:80%"></span>
+                                        <span class="tooltiptext tooltip-top"></span>
                                     </div>
-                                    <button class="btn-product btn-cart text-normal ls-normal font-weight-semi-bold"><i
-                                            class="d-icon-bag"></i>Add to
-                                        Cart</button>
+                                    <a href="#product-tab-reviews" class="link-to-tab rating-reviews">( 11 reviews )</a>
                                 </div>
-                            </div>
-                            <hr class="product-divider mb-3">
-                            <div class="product-footer">
-                                <div class="social-links mr-4">
-                                    <a href="#" class="social-link social-facebook fab fa-facebook-f"></a>
-                                    <a href="#" class="social-link social-twitter fab fa-twitter"></a>
-                                    <a href="#" class="social-link social-pinterest fab fa-pinterest-p"></a>
+                                <div class="product-form product-variations product-color">
+                                    <label>Color:</label>
+                                    <div class="select-box">
+                                        <select name="color_id" class="form-control">
+                                            <option value="" selected="selected">Choose an Option</option>
+                                            @foreach ($product->colors as $color)
+                                                <option value="{{ $color->id }}">{{ $color->display_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
-                                <span class="divider d-lg-show"></span>
-                                <a href="#" class="btn-product btn-wishlist mr-6"><i class="d-icon-heart"></i>Add
-                                    to
-                                    wishlist</a>
-                                <a href="#" class="btn-product btn-compare"><i class="d-icon-compare"></i>Add
-                                    to
-                                    compare</a>
-                            </div>
+                                <div class="product-variation-price">
+                                    <span>{{ number_format($product->price) . 'đ' }}</span>
+                                </div>
+                                <hr class="product-divider">
+                                <div class="product-form product-qty">
+                                    <div class="product-form-group">
+                                        <div class="input-group mr-2">
+                                            <button type="button" class="quantity-minus d-icon-minus"></button>
+                                            <input name="quantity" class="quantity form-control" type="number"
+                                                min="1" max="1000000" value="1" style="font-weight: bold">
+                                            <button type="button" class="quantity-plus d-icon-plus"></button>
+                                        </div>
+                                        <button type="submit"
+                                            style="border: 0; flex: 1; min-width: 13rem; font-size: 1.4rem;
+                                        border-radius: 0.3rem; background-color: #26c; transition: background-color 0.3s; color: #fff;
+                                        cursor: pointer; max-width: 20.7rem; height: 4.5rem;"
+                                            class="single-add-to-cart btn-product text-normal ls-normal font-weight-semi-bold"><i
+                                                class="d-icon-bag"></i>Add to
+                                            Cart</button>
+                                    </div>
+                                </div>
+                                <hr class="product-divider mb-3">
+                                <div class="product-footer">
+                                    <div class="social-links mr-4">
+                                        <a href="#" class="social-link social-facebook fab fa-facebook-f"></a>
+                                        <a href="#" class="social-link social-twitter fab fa-twitter"></a>
+                                        <a href="#" class="social-link social-pinterest fab fa-pinterest-p"></a>
+                                    </div>
+                                    <span class="divider d-lg-show"></span>
+                                    <a href="#" class="btn-product btn-wishlist mr-6"><i
+                                            class="d-icon-heart"></i>Add
+                                        to
+                                        wishlist</a>
+                                    <a href="#" class="btn-product btn-compare"><i class="d-icon-compare"></i>Add
+                                        to
+                                        compare</a>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -172,8 +189,8 @@
                                     <h5 class="description-title font-weight-semi-bold ls-m mb-5">Video Description
                                     </h5>
                                     <figure class="p-relative d-inline-block mb-2">
-                                        <img src="{{ asset('client/images/product/product.jpg') }}" width="559" height="370"
-                                            alt="Product" />
+                                        <img src="{{ asset('client/images/product/product.jpg') }}" width="559"
+                                            height="370" alt="Product" />
                                         <a class="btn-play btn-iframe" href="video/memory-of-a-woman.mp4">
                                             <i class="d-icon-play-solid"></i>
                                         </a>
@@ -518,7 +535,8 @@
                                             title="Add to wishlist"><i class="d-icon-heart"></i></a>
                                     </div>
                                     <div class="product-action">
-                                        <a href="{{ route('products.detail', $relatedProduct) }}" class="btn-product" title="Quick View">Quick
+                                        <a href="{{ route('products.detail', $relatedProduct) }}" class="btn-product"
+                                            title="Quick View">Quick
                                             View</a>
                                     </div>
                                 </figure>
@@ -545,10 +563,13 @@
                                 </div>
                             </div>
                         @endforeach
-
                     </div>
                 </section>
             </div>
         </div>
     </main>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('client/js/app.js') }}"></script>
+@endpush
