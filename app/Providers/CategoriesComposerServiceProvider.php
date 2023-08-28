@@ -25,5 +25,10 @@ class CategoriesComposerServiceProvider extends ServiceProvider
             $categories = Category::query()->get();
             $view->with('categories', $categories);
         });
+
+        view()->composer('client.layouts.header', function (View $view) {
+            $categories = Category::query()->get();
+            $view->with('categories', $categories);
+        });
     }
 }

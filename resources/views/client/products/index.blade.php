@@ -1,8 +1,9 @@
 @extends('client.layouts.app')
 
+@section('title', 'Riode')
 @section('content')
     <main class="main">
-        <div class="page-header"
+        {{-- <div class="page-header"
             style="background-image: url({{ asset('client/images/shop/page-header-back.jpg') }}); background-color: #3C63A4;">
             <h3 class="page-subtitle">Categories</h3>
             <h1 class="page-title">4 Columns</h1>
@@ -13,7 +14,7 @@
                 <li class="delimiter">/</li>
                 <li>4 Columns</li>
             </ul>
-        </div>
+        </div> --}}
         <div class="page-content mb-10 pb-6">
             @if (session('message'))
                 <div class="alert alert-simple alert-btn" style="margin-top: 2rem">
@@ -22,6 +23,16 @@
                     <button type="button" class="btn btn-link btn-close"><i class="d-icon-times"></i></button>
                 </div>
             @endif
+
+            @if ($errors->any())
+            {{dd($errors->all())}}
+                <div class="alert alert-simple alert-btn">
+                    @foreach ($errors->all() as $error)
+                        <span>{{ $error }}</span>
+                    @endforeach
+                </div>
+            @endif
+
             <div class="container">
                 <div class="row gutter-lg main-content-wrap">
 

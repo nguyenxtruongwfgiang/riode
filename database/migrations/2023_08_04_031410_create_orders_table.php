@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('phone');
             $table->enum('payment_status', ['paid', 'unpaid'])->default('unpaid');
             $table->enum('payment_method', ['cash_on_delivery', 'banking', 'paypal'])->default('cash_on_delivery');
-            $table->enum('status', ['ordered', 'process', 'delivered', 'canceled'])->default('ordered');
+            $table->enum('status', ['order_placed', 'process', 'delivered', 'canceled'])->default('order_placed');
             $table->timestamps();
         });
     }

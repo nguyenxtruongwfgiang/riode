@@ -14,7 +14,7 @@
                 <ul class="widget-body filter-items search-ul">
                     <li><a href="{{ route('products.index') }}">All Brands</a></li>
                     @foreach ($categories as $category)
-                        <li class="active"><a href="/categories/{{ $category->id }}/products">{{ $category->name }}</a></li>
+                        <li class="active"><a href="{{ route('products.category', $category->id) }}">{{ $category->name }}</a></li>
                     @endforeach
                 </ul>
             </div>

@@ -6,10 +6,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Riode - Ultimate eCommerce Template</title>
+    <title>
+        @yield('title')
+    </title>
     <meta name="keywords" content="HTML5 Template" />
     <meta name="description" content="Riode - Ultimate eCommerce Template">
     <meta name="author" content="D-THEMES">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="icon" type="image/png" href="{{ asset('client/images/icons/favicon.png') }}">
     <script>
@@ -48,6 +51,7 @@
                 <div class="row gutter-lg main-content-wrap">
 
                     @yield('content')
+
                 </div>
             </div>
         </div>
@@ -56,28 +60,6 @@
     </div>
 
     @include('client.layouts.partials.scroll-top')
-
-    <div class="minipopup-box purchased-box">
-        <p class="minipopup-title">Someone just purchased below.</p>
-        <div class="product product-list-sm mb-4">
-            <figure class="product-media">
-                <a href="#">
-                    <img src="images/cart/product-1.jpg" alt="product" width="90" height="90" />
-                </a>
-            </figure>
-            <div class="product-detail">
-                <a href="product.html" class="product-name">Daisy Bag Sonia by Sonia Rykiel</a>
-                <span class="product-price">$199.00</span>
-                <div class="ratings-container">
-                    <div class="ratings-full">
-                        <span class="ratings" style="width:100%"></span>
-                        <span class="tooltiptext tooltip-top"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     @include('client.layouts.mobile-menu');
 
@@ -90,9 +72,10 @@
     <script src="{{ asset('client/vendor/elevatezoom/jquery.elevatezoom.min.js') }}"></script>
     <script src="{{ asset('client/vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset('client/vendor/owl-carousel/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('client/vendor/nouislider/nouislider.min.js') }}"></script>
 
     <script src="{{ asset('client/js/main.js') }}"></script>
+
+    @stack('scripts')
 </body>
 
 <!-- Mirrored from d-themes.com/html/riode/shop-grid-4cols.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 18 Jul 2023 15:27:04 GMT -->

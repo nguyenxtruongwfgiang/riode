@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\CartComposerServiceProvider;
 use App\Providers\CategoriesComposerServiceProvider;
 use App\Providers\ColorsComposerServiceProvider;
 use Illuminate\Support\Facades\Facade;
@@ -172,7 +173,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         CategoriesComposerServiceProvider::class,
-        ColorsComposerServiceProvider::class
+        ColorsComposerServiceProvider::class,
+        CartComposerServiceProvider::class
     ])->toArray(),
 
     /*
