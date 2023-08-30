@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('product_id');
             $table->foreignId('color_id');
             $table->foreignId('shipping_id');
+            $table->foreignId('storage_id');
             $table->integer('quantity');
             $table->float('total_amount');
             $table->text('address');
