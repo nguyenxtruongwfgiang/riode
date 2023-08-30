@@ -15,7 +15,7 @@ class Product extends Model
         'image',
         'category_id',
         'color_id',
-        'quantity'
+        'quantity',
     ];
 
     public function category() {
@@ -28,5 +28,9 @@ class Product extends Model
 
     public function carts() {
         return $this->hasMany(Cart::class);
+    }
+
+    public function storages() {
+        return $this->belongsToMany(Storage::class, 'product_has_storages', 'product_id', 'storage_id');
     }
 }

@@ -24,7 +24,7 @@
                         </thead>
                         <tbody>
                             @foreach ($carts as $cart)
-                                <tr>
+                                <tr id="row-{{ $cart->id }}">
                                     <td class="product-thumbnail">
                                         <figure>
                                             <a href="{{ route('products.detail', $cart->product->id) }}">
@@ -137,7 +137,19 @@
                 }
 
                 $.post(url, data, res => {
-                    console.log(res);
+                    const cartId = res.data.id;
+
+                    if(res.delete_cart_item) {
+                        $(`row-${cartId}`).remove();
+                    }
+
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'success',
+                        showConfirmButton: false,
+                        time: 500
+                    })
                 })
             }, TIME_TO_UPDATE))
         });

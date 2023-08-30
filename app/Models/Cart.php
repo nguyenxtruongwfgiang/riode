@@ -29,4 +29,8 @@ class Cart extends Model
         return $this->belongsTo(Product::class);
     }
 
+    public function storage() {
+        return $this->belongsTo(Storage::class);
+    }
+
 }

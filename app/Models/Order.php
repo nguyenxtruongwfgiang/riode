@@ -13,6 +13,7 @@ class Order extends Model
         'user_id',
         'product_id',
         'color_id',
+        'storage_id',
         'shipping_id',
         'quantity',
         'total_amount',
@@ -33,5 +34,9 @@ class Order extends Model
 
     public function shipping() {
         return $this->belongsTo(Shipping::class);
+    }
+
+    public function storage() {
+        return $this->belongsTo(Storage::class);
     }
 }
