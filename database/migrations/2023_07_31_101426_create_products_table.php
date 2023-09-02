@@ -19,7 +19,6 @@ return new class extends Migration
             $table->float('sale')->nullable();
             $table->integer('quantity')->default(1);
             $table->foreignId('category_id');
-            $table->integer('color_id')->nullable();
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CartResource;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Services\CartService;
@@ -36,6 +37,7 @@ class CartController extends Controller
             $request->validate(
                 [
                     'color_id' => 'required',
+                    'storage_id' => 'required',
                     'quantity' => 'required|integer|min:1'
                 ]
             );
@@ -43,7 +45,7 @@ class CartController extends Controller
             $alreadyCart = Cart::where('user_id', auth()->user()->id)->where('product_id', $product->id)->first();
             if ($alreadyCart) {
                 // ->color->id == $request->color_id
-                if ($alreadyCart->color_id == $request->color_id) {
+                if ($alreadyCart->color_id == $request->color_id && $alreadyCart->storage_id == $request->storage_id) {
                     $alreadyCart->quantity = $alreadyCart->quantity + $request->quantity;
 
                     if ($alreadyCart->product->quantity < $alreadyCart->quantity || $alreadyCart->product->quantity < 1) {
@@ -57,6 +59,7 @@ class CartController extends Controller
                     $cart->price = $product->price;
                     $cart->color_id = $request->color_id;
                     $cart->quantity = $request->quantity;
+                    $cart->storage_id = $request->storage_id;
 
                     if ($cart->product->quantity < $cart->quantity || $cart->product->quantity < 1) {
                         return back()->with('message', 'Product Out Of Stock');
@@ -71,6 +74,7 @@ class CartController extends Controller
                 $cart->price = $product->price;
                 $cart->color_id = $request->color_id;
                 $cart->quantity = $request->quantity;
+                $cart->storage_id = $request->storage_id;
 
                 if ($cart->product->quantity < $cart->quantity || $cart->product->quantity < 1) {
                     return back()->with('message', 'Product Out Of Stock');
@@ -111,7 +115,7 @@ class CartController extends Controller
             }
 
             return response()->json([
-                'data' => $cart,
+                'data' => new CartResource($cart),
                 'delete_cart_item' => $attributes['quantity'] < 1
             ], Response::HTTP_OK);
         } catch (\Exception $exception) {

@@ -10,6 +10,7 @@
                 <a href="contact-us.html" class="contact d-lg-show"><i class="d-icon-map"></i>Contact</a>
                 <a href="#" class="help d-lg-show"><i class="d-icon-info"></i> Need Help</a>
                 @auth
+                    <a href="{{ route('profile.edit') }}">Profile</a>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <a style="cursor: pointer"
@@ -60,13 +61,13 @@
                 </a>
                 <span class="divider"></span>
                 <div class="dropdown cart-dropdown type2 mr-0 mr-lg-2">
-                    <a href="#" class="cart-toggle label-block link">
+                    <a href="{{ route('cart.index') }}" class="cart-toggle label-block link">
                         <div class="cart-label d-lg-show">
                             <span class="cart-name">Shopping Cart:</span>
-                            <span class="cart-price"
+                            <span class="cart-price summary-subtotal-price"
                                 style="text-transform: lowercase">{{ number_format($totalAmount) . 'đ' }}</span>
                         </div>
-                        <i class="d-icon-bag"><span class="cart-count">{{ $cartItemCount }}</span></i>
+                        <i class="d-icon-bag"><span class="cart-count" id="count-cart" data-count="{{ $cartItemCount }}">{{ $cartItemCount }}</span></i>
                     </a>
 
                     <div class="dropdown-box">
@@ -74,7 +75,7 @@
                             <div class="products scrollable">
 
                                 @foreach ($cartItems as $cartItem)
-                                    <div class="product product-cart">
+                                    <div id="cart-item-{{ $cartItem->id }}" class="product product-cart">
                                         <figure class="product-media">
                                             <a href="#">
                                                 <img src="{{ asset($cartItem->product->image) }}" alt="product"
@@ -88,9 +89,9 @@
                                         </figure>
                                         <div class="product-detail">
                                             <a href="{{ route('products.detail', $cartItem->product->id) }}"
-                                                class="product-name">{{ $cartItem->product->name . ' ' . $cartItem->color->display_name }}</a>
+                                                class="product-name">{{ $cartItem->product->name . ' ' . $cartItem->color->display_name . ' - ' . $cartItem->storage->name }}</a>
                                             <div class="price-box">
-                                                <span class="product-quantity">{{ $cartItem->quantity }}</span>
+                                                <span class="product-quantity" id="quantity-product" data-quantity="{{ $cartItem->quantity }}">{{ $cartItem->quantity }}</span>
                                                 <span
                                                     class="product-price">{{ number_format($cartItem->product->price) . 'đ' }}</span>
                                             </div>
@@ -102,7 +103,7 @@
 
                             <div class="cart-total">
                                 <label>Subtotal:</label>
-                                <span class="price">{{ number_format($totalAmount) . 'đ' }}</span>
+                                <span class="price summary-subtotal-price">{{ number_format($totalAmount) . 'đ' }}</span>
                             </div>
 
                             <div class="cart-action">

@@ -25,7 +25,7 @@
             @endif
 
             @if ($errors->any())
-            {{dd($errors->all())}}
+                {{ dd($errors->all()) }}
                 <div class="alert alert-simple alert-btn">
                     @foreach ($errors->all() as $error)
                         <span>{{ $error }}</span>
@@ -111,6 +111,16 @@
                                                             @foreach ($product->colors as $color)
                                                                 <option value="{{ $color->id }}">
                                                                     {{ $color->display_name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col">
+                                                        <select class="product-color" name="storage_id">
+                                                            <option value="" selected>Choose storage</option>
+                                                            @foreach ($product->storages as $storage)
+                                                                <option value="{{ $storage->id }}">
+                                                                    {{ $storage->name }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
