@@ -1,12 +1,22 @@
-const cartQuantity = document.querySelector('.cart-quantity');
-const minus = document.querySelector('.quantity-minus');
-const plus = document.querySelector('.quantity-plus');
-const min = 0;
-
-minus.addEventListener('click', (event) => {
-    cartQuantity.value--;
+// const cartQuantity = document.querySelector('.cart-quantity');
+const minus = document.querySelectorAll('.quantity-minus');
+const plus = document.querySelectorAll('.quantity-plus');
+minus.forEach((button) => {
+    button.addEventListener('click', (event) => {
+        const cartQuantity = event.target.parentNode.querySelector('.cart-quantity');
+        let quantity = parseInt(cartQuantity.value);
+        if (quantity > 1) {
+            quantity--;
+            cartQuantity.value = quantity;
+        }
+    });
 });
 
-plus.addEventListener('click', (event) => {
-    cartQuantity.value++;
+plus.forEach((button) => {
+    button.addEventListener('click', (event) => {
+        const cartQuantity = event.target.parentNode.querySelector('.cart-quantity');
+        let quantity = parseInt(cartQuantity.value);
+        quantity++;
+        cartQuantity.value = quantity;
+    });
 });

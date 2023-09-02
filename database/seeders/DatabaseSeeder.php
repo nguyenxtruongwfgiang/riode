@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             ColorSeeder::class,
             PermissionSeeder::class,
             RoleSeeder::class,
-            ShippingSeeder::class
+            ShippingSeeder::class,
+            StorageSeeder::class
         ]);
     }
 }

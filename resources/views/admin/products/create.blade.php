@@ -102,7 +102,27 @@
                                                 </div>
                                             </div>
                                         @endforeach
-                                        @error('color_id')
+                                        @error('colors')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-0">
+                                    <label class="my-2 py-1">Storage</label>
+                                    <div class="row">
+                                        @foreach ($storages as $storage)
+                                            <div class="col-6">
+                                                <div>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input" name="storages[]"
+                                                            value="{{ $storage->id }}">
+                                                        <label for="custom-control-label">{{ $storage->name }}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        @error('storages')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>

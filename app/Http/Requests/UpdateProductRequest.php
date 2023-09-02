@@ -28,7 +28,8 @@ class UpdateProductRequest extends FormRequest
             'sale'          => 'nullable|integer',
             'quantity'      => 'required|integer',
             'category_id'   => 'required|integer',
-            'colors'        => 'required'
+            'colors'        => 'required',
+            'storages'      => 'required'
         ];
     }
 }

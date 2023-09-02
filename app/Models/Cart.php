@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\CartService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +15,8 @@ class Cart extends Model
         'product_id',
         'color_id',
         'price',
-        'quantity'
+        'quantity',
+        'storage_id'
     ];
 
     public function getAmountAttribute() {
@@ -31,6 +33,14 @@ class Cart extends Model
 
     public function storage() {
         return $this->belongsTo(Storage::class);
+    }
+
+    public function getTotalAmountAttribute() {
+        return (new CartService)->getTotalAmount();
+    }
+
+    public function getCountCartAttribute() {
+        return (new CartService)->countCart();
     }
 
 }

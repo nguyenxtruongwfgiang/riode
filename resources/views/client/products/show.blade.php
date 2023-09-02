@@ -105,6 +105,17 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="product-form product-variations product-color">
+                                    <label>Storage:</label>
+                                    <div class="select-box">
+                                        <select name="storage_id" class="form-control">
+                                            <option value="" selected="selected">Choose an Option</option>
+                                            @foreach ($product->storages as $storage)
+                                                <option value="{{ $storage->id }}">{{ $storage->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="product-variation-price">
                                     <span>{{ number_format($product->price) . 'đ' }}</span>
                                 </div>

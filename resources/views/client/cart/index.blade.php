@@ -50,9 +50,8 @@
                                             <button data-action="{{ route('cart.update', $cart->id) }}"
                                                 data-id="{{ $cart->id }}" type="button"
                                                 class="quantity-minus d-icon-minus btn-update-quantity"></button>
-                                            <input class="cart-quantity form-control" type="number" min="1"
-                                                max="1000000" value="{{ $cart->quantity }}"
-                                                id="productQuantity-{{ $cart->id }}">
+                                            <input class="cart-quantity form-control" type="number" max="1000000"
+                                                value="{{ $cart->quantity }}" id="productQuantity-{{ $cart->id }}">
                                             <button data-action="{{ route('cart.update', $cart->id) }}"
                                                 data-id="{{ $cart->id }}" type="button"
                                                 class="quantity-plus d-icon-plus btn-update-quantity"></button>
@@ -114,11 +113,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
         integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="{{ asset('client/js/app.js') }}"></script>
     <script src="{{ asset('client/vendor/jquery/jquery.min.js') }}"></script>
     <script type="text/javascript">
+        const minus = document.querySelectorAll('.quantity-minus');
+        const plus = document.querySelectorAll('.quantity-plus');
+        minus.forEach((button) => {
+            button.addEventListener('click', (event) => {
+                const cartQuantity = event.target.parentNode.querySelector('.cart-quantity');
+                let quantity = parseInt(cartQuantity.value);
+                // if (quantity > 1) {
+                    quantity--;
+                    cartQuantity.value = quantity;
+                // }
+            });
+        });
+
+        plus.forEach((button) => {
+            button.addEventListener('click', (event) => {
+                const cartQuantity = event.target.parentNode.querySelector('.cart-quantity');
+                let quantity = parseInt(cartQuantity.value);
+                quantity++;
+                cartQuantity.value = quantity;
+            });
+        });
         $(function() {
-            const TIME_TO_UPDATE = 1000;
+            const TIME_TO_UPDATE = 500;
 
             $(document).on('click', '.btn-update-quantity', _.debounce(function(e) {
                 let url = $(this).data('action')
@@ -138,15 +157,22 @@
 
                 $.post(url, data, res => {
                     const cartId = res.data.id;
+                    const cart = res.data;
 
-                    if(res.delete_cart_item) {
-                        $(`row-${cartId}`).remove();
+                    $('#count-cart').text(res.data.count_cart);
+
+                    if (res.delete_cart_item) {
+                        $(`#row-${cartId}`).remove();
+                        $(`#cart-item-${cartId}`).remove();
                     }
+
+                    $('.summary-subtotal-price').text(`${cart.total_amount.toLocaleString()}đ`)
+                    $('#quantity-product').text(`${cart.quantity}`)
 
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'success',
+                        title: 'cart updated successfully',
                         showConfirmButton: false,
                         time: 500
                     })

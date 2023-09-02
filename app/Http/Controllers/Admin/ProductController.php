@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Product;
+use App\Models\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -29,7 +30,8 @@ class ProductController extends Controller
     {
         $colors = Color::query()->get();
         $categories = Category::query()->get();
-        return view('admin.products.create', compact('categories', 'colors'));
+        $storages = Storage::query()->get();
+        return view('admin.products.create', compact('categories', 'colors', 'storages'));
     }
 
     /**
@@ -49,6 +51,7 @@ class ProductController extends Controller
 
             $product->save();
             $product->colors()->attach($attributes['colors']);
+            $product->storages()->attach($attributes['storages']);
 
             return redirect()->route('admin.products.index')
                 ->with(['message' => 'Product Created Successfully']);
@@ -76,7 +79,8 @@ class ProductController extends Controller
         $product = Product::with('colors')->findOrFail($id);
         $colors = Color::query()->get();
         $categories = Category::query()->get();
-        return view('admin.products.edit', compact('product', 'colors', 'categories'));
+        $storages = Storage::query()->get();
+        return view('admin.products.edit', compact('product', 'colors', 'categories', 'storages'));
     }
 
     /**
@@ -96,6 +100,7 @@ class ProductController extends Controller
 
             $product->save();
             $product->colors()->sync($attributes['colors']);
+            $product->storages()->sync($attributes['storages']);
 
             return redirect()->route('admin.products.index')
                 ->with(['message' => 'Product Updated Successfully']);
@@ -115,6 +120,7 @@ class ProductController extends Controller
         try {
             $product->delete();
             $product->colors()->delete();
+            $product->storages()->delete();
 
             delete_file($product->image);
             return back()

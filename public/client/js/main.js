@@ -2661,7 +2661,7 @@ window.Riode = {};
         function QuantityInput($el) {
             return this.init($el);
         }
-        QuantityInput.min = 1;
+        QuantityInput.min = 0;
         QuantityInput.max = 1000000;
         QuantityInput.value = 1;
         QuantityInput.prototype.init = function ($el) {
