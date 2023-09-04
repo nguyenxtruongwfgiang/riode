@@ -49,7 +49,8 @@
                                     <div>
                                         <select name="type" id="" class="form-control">
                                             <option value="">Select Type</option>
-                                            <option value="money" {{ $coupon->type == 'money' ? 'selected' : '' }}>Money</option>
+                                            <option value="fixed" {{ $coupon->type == 'fixed' ? 'selected' : '' }}>Fixed</option>
+                                            <option value="percent" {{ $coupon->type == 'percent' ? 'selected' : '' }}>Percent</option>
                                         </select>
                                     </div>
                                     @error('type')

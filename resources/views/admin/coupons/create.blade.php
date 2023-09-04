@@ -48,7 +48,8 @@
                                     <div>
                                         <select name="type" id="" class="form-control">
                                             <option value="">Select Type</option>
-                                            <option value="money">Money</option>
+                                            <option value="fixed">Fixed</option>
+                                            <option value="percent">Percent</option>
                                         </select>
                                     </div>
                                     @error('type')

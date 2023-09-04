@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CartResource;
 use App\Models\Cart;
+use App\Models\Coupon;
 use App\Models\Product;
 use App\Services\CartService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -23,6 +25,7 @@ class CartController extends Controller
 
     public function index()
     {
+        session_unset();
         $carts = $this->cartService->getCarts();
 
         $totalAmount = $this->cartService->getTotalAmount();
@@ -123,5 +126,27 @@ class CartController extends Controller
 
             return response()->json([], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+    }
+
+    public function applyCoupon(Request $request)
+    {
+        $request->validate([
+            'coupon_code' => 'required'
+        ], [
+            'coupon_code.required' => 'Please enter coupon code.'
+        ]);
+
+        $coupon_code = $request->coupon_code;
+        $coupon = Coupon::where('name', $coupon_code)->first();
+
+        if ($coupon) {
+            Session::put('coupon', [
+
+            ]);
+        } else {
+            return back()->with('error', 'Invalid coupon code, Please try again.');
+        }
+
+        return back()->with('message', 'Coupon Code Applied Successfully.');
     }
 }
