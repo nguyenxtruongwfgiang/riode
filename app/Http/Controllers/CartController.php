@@ -25,7 +25,6 @@ class CartController extends Controller
 
     public function index()
     {
-        session_unset();
         $carts = $this->cartService->getCarts();
 
         $totalAmount = $this->cartService->getTotalAmount();
@@ -140,9 +139,19 @@ class CartController extends Controller
         $coupon = Coupon::where('name', $coupon_code)->first();
 
         if ($coupon) {
-            Session::put('coupon', [
-
-            ]);
+            if (!Session::has('coupon')) {
+                if ($coupon->expery_date >= now()) {
+                    $totalAmount = $this->cartService->getTotalAmount();
+                    Session::put('coupon', [
+                        'name' => $coupon->name,
+                        'value' => $coupon->discount($totalAmount)
+                    ]);
+                } else {
+                    return back()->with('error', 'Coupon has expired. Please try again with a valid coupon code.');
+                }
+            } else {
+                return back()->with('error', 'Coupon already applied');
+            }
         } else {
             return back()->with('error', 'Invalid coupon code, Please try again.');
         }

@@ -128,7 +128,7 @@
                                                 min="1" max="1000000" value="1" style="font-weight: bold">
                                             <button type="button" class="quantity-plus d-icon-plus"></button>
                                         </div>
-                                        <button type="submit"
+                                        <button type="submit" @if ($product->quantity < 1) 'disabled' @endif
                                             style="border: 0; flex: 1; min-width: 13rem; font-size: 1.4rem;
                                         border-radius: 0.3rem; background-color: #26c; transition: background-color 0.3s; color: #fff;
                                         cursor: pointer; max-width: 20.7rem; height: 4.5rem;"
@@ -531,7 +531,7 @@
                         @foreach ($relatedProducts as $relatedProduct)
                             <div class="product">
                                 <figure class="product-media">
-                                    <a href="product.html">
+                                    <a href="{{ route('products.detail', $relatedProduct) }}">
                                         <img src="{{ asset($relatedProduct->image) }}" alt="product" width="280"
                                             height="315">
                                     </a>
@@ -539,9 +539,10 @@
                                         <label class="product-label label-sale">27% off</label>
                                     </div>
                                     <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
+                                        <button disabled style="cursor: pointer"
+                                            type="submit" class="btn-product-icon" data-toggle="modal"
                                             data-target="#addCartModal" title="Add to cart"><i
-                                                class="d-icon-bag"></i></a>
+                                                class="d-icon-bag"></i></button>
                                         <a href="#" class="btn-product-icon btn-wishlist"
                                             title="Add to wishlist"><i class="d-icon-heart"></i></a>
                                     </div>
@@ -556,7 +557,7 @@
                                         <a href="shop-grid-3col.html">{{ $relatedProduct->category->name }}</a>
                                     </div>
                                     <h3 class="product-name">
-                                        <a href="product.html">{{ $relatedProduct->name }}</a>
+                                        <a href="{{ route('products.detail', $relatedProduct) }}">{{ $relatedProduct->name }}</a>
                                     </h3>
                                     <div class="product-price">
                                         <ins class="new-price">{{ number_format($relatedProduct->price) . 'đ' }}</ins><del

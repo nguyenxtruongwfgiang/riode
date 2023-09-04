@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOrderRequest;
+use App\Models\Shipping;
 use App\Services\CartService;
 use Illuminate\Http\Request;
 
@@ -20,9 +22,15 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $cart = $this->cartService->getCarts();
+        $cartItems = $this->cartService->getCarts();
 
-        return view('client.cart.checkout');
+        $totalAmount = $this->cartService->getTotalAmount();
+
+        $shippingMethods = Shipping::query()->get();
+
+        $user = auth()->user();
+
+        return view('client.cart.checkout', compact('cartItems', 'totalAmount', 'shippingMethods', 'user'));
     }
 
     /**
@@ -36,7 +44,7 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreOrderRequest $request)
     {
         //
     }
