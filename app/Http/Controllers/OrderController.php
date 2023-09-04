@@ -21,6 +21,8 @@ class OrderController extends Controller
     public function index()
     {
         $cart = $this->cartService->getCarts();
+
+        return view('client.cart.checkout');
     }
 
     /**

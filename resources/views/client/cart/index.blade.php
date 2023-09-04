@@ -4,9 +4,9 @@
 @section('content')
     <div class="page-content pt-7 pb-10">
         <div class="step-by pr-4 pl-4">
-            <h3 class="title title-simple title-step active"><a href="cart.html">1. Shopping Cart</a></h3>
-            <h3 class="title title-simple title-step"><a href="checkout.html">2. Checkout</a></h3>
-            <h3 class="title title-simple title-step"><a href="order.html">3. Order Complete</a></h3>
+            <h3 class="title title-simple title-step active"><a href="{{ route('cart.index') }}">1. Shopping Cart</a></h3>
+            <h3 class="title title-simple title-step"><a href="{{ route('checkout.index') }}">2. Checkout</a></h3>
+            <h3 class="title title-simple title-step"><a href="#">3. Order Complete</a></h3>
         </div>
         <div class="container mt-7 mb-2">
             <div class="row">
@@ -58,7 +58,8 @@
                                         </div>
                                     </td>
                                     <td class="product-price">
-                                        <span>{{ number_format($cart->amount) . 'đ' }}</span>
+                                        <span id="amount-{{ $cart->id }}"
+                                            data-amount="{{ $cart->amount }}">{{ number_format($cart->amount) . 'đ' }}</span>
                                     </td>
                                     <td class="product-close">
                                         <a href="{{ route('cart.delete', $cart->id) }}" class="product-remove"
@@ -79,10 +80,24 @@
                     </div>
                     <div class="cart-coupon-box mb-8">
                         <h4 class="title coupon-title text-uppercase ls-m">Coupon Discount</h4>
-                        <input type="text" name="coupon_code" class="input-text form-control text-grey ls-m mb-4"
-                            id="coupon_code" value placeholder="Enter coupon code here...">
-                        <button type="submit" class="btn btn-md btn-dark btn-rounded btn-outline">Apply
-                            Coupon</button>
+                        <form action="{{ route('coupon.apply') }}" method="POST">
+                            @csrf
+                            <input type="text" name="coupon_code" class="input-text form-control text-grey ls-m mb-4"
+                                id="coupon_code" value placeholder="Enter coupon code here...">
+                            @error('coupon_code')
+                                <div class="text-danger" style="color: red; margin-bottom: 1rem">{{ $message }}</div>
+                            @enderror
+                            @if (session('message'))
+                                <div class="text-danger" style="color: green; margin-bottom: 1rem">{{ session('message') }}
+                                </div>
+                            @endif
+                            @if (session('error'))
+                                <div class="text-danger" style="color: red; margin-bottom: 1rem">{{ session('error') }}
+                                </div>
+                            @endif
+                            <button type="submit" class="btn btn-md btn-dark btn-rounded btn-outline">Apply
+                                Coupon</button>
+                        </form>
                     </div>
                 </div>
                 <aside class="col-lg-3 sticky-sidebar-wrapper">
@@ -98,6 +113,16 @@
                                         <p class="summary-subtotal-price">{{ number_format($totalAmount) . 'đ' }}</p>
                                     </td>
                                 </tr>
+                                @if (session()->has('coupon'))
+                                    <tr class="summary-subtotal">
+                                        <td>
+                                            <h4 class="summary-subtitle">You save</h4>
+                                        </td>
+                                        <td>
+                                            <p class="summary-subtotal-price">{{ number_format(1000000) . 'đ' }}</p>
+                                        </td>
+                                    </tr>
+                                @endif
                             </table>
                             <a style="margin-top: 1rem; font-size: 1.2rem" href="{{ route('checkout.index') }}"
                                 class="btn btn-dark btn-rounded btn-checkout">Proceed to
@@ -108,23 +133,23 @@
             </div>
         </div>
     </div>
-
+@endsection
+@push('scripts')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
         integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('client/vendor/jquery/jquery.min.js') }}"></script>
     <script type="text/javascript">
+        const couponName = document.querySelector('#coupon_code');
         const minus = document.querySelectorAll('.quantity-minus');
         const plus = document.querySelectorAll('.quantity-plus');
         minus.forEach((button) => {
             button.addEventListener('click', (event) => {
                 const cartQuantity = event.target.parentNode.querySelector('.cart-quantity');
                 let quantity = parseInt(cartQuantity.value);
-                // if (quantity > 1) {
-                    quantity--;
-                    cartQuantity.value = quantity;
-                // }
+                quantity--;
+                cartQuantity.value = quantity;
             });
         });
 
@@ -135,6 +160,10 @@
                 quantity++;
                 cartQuantity.value = quantity;
             });
+        });
+
+        couponName.addEventListener('input', () => {
+            couponName.value = couponName.value.toUpperCase();
         });
         $(function() {
             const TIME_TO_UPDATE = 500;
@@ -167,7 +196,8 @@
                     }
 
                     $('.summary-subtotal-price').text(`${cart.total_amount.toLocaleString()}đ`)
-                    $('#quantity-product').text(`${cart.quantity}`)
+                    $(`#quantity-product-${cartId}`).text(`${cart.quantity}`)
+                    $(`#amount-${cartId}`).text(`${cart.amount.toLocaleString()}đ`)
 
                     Swal.fire({
                         position: 'top-end',
@@ -180,4 +210,4 @@
             }, TIME_TO_UPDATE))
         });
     </script>
-@endsection
+@endpush

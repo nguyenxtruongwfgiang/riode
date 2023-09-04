@@ -91,7 +91,7 @@
                                             <a href="{{ route('products.detail', $cartItem->product->id) }}"
                                                 class="product-name">{{ $cartItem->product->name . ' ' . $cartItem->color->display_name . ' - ' . $cartItem->storage->name }}</a>
                                             <div class="price-box">
-                                                <span class="product-quantity" id="quantity-product" data-quantity="{{ $cartItem->quantity }}">{{ $cartItem->quantity }}</span>
+                                                <span class="product-quantity" id="quantity-product-{{ $cartItem->id }}" data-quantity="{{ $cartItem->quantity }}">{{ $cartItem->quantity }}</span>
                                                 <span
                                                     class="product-price">{{ number_format($cartItem->product->price) . 'đ' }}</span>
                                             </div>

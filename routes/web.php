@@ -44,4 +44,6 @@ Route::middleware('auth')->group(function() {
     Route::get('checkout', [OrderController::class, 'index'])->name('checkout.index');
     Route::get('cart/delete/{cart}', [CartController::class, 'destroy'])->name('cart.delete');
     Route::post('cart/update{cart}', [CartController::class, 'update'])->name('cart.update');
+    Route::post('cart/apply-coupon', [CartController::class, 'applyCoupon'])->name('coupon.apply');
+    Route::get('checkout', [OrderController::class, 'index'])->name('checkout.index');
 });

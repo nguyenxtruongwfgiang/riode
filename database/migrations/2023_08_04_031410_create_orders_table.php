@@ -25,6 +25,7 @@ return new class extends Migration
             $table->enum('payment_status', ['paid', 'unpaid'])->default('unpaid');
             $table->enum('payment_method', ['cash_on_delivery', 'banking', 'paypal'])->default('cash_on_delivery');
             $table->enum('status', ['order_placed', 'process', 'delivered', 'canceled'])->default('order_placed');
+            $table->text('inquiry_details')->nullable();
             $table->timestamps();
         });
     }
