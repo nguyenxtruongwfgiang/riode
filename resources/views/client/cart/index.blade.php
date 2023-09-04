@@ -119,7 +119,25 @@
                                             <h4 class="summary-subtitle">You save</h4>
                                         </td>
                                         <td>
-                                            <p class="summary-subtotal-price">{{ number_format(1000000) . 'đ' }}</p>
+                                            <p class="summary-subtotal-price">
+                                                {{ number_format(Session::get('coupon')['value']) . 'đ' }}</p>
+                                        </td>
+                                    </tr>
+                                    <tr class="summary-subtotal">
+                                        <td>
+                                            <h4 class="summary-subtitle">You pay</h4>
+                                        </td>
+                                        <td>
+                                            <p class="summary-subtotal-price">{{ number_format($totalAmount - Session::get('coupon')['value']) . 'đ' }}</p>
+                                        </td>
+                                    </tr>
+                                @else
+                                    <tr class="summary-subtotal">
+                                        <td>
+                                            <h4 class="summary-subtitle">You pay</h4>
+                                        </td>
+                                        <td>
+                                            <p class="summary-subtotal-price">{{ number_format($totalAmount) . 'đ' }}</p>
                                         </td>
                                     </tr>
                                 @endif

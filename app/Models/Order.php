@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
@@ -11,9 +12,6 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
-        'product_id',
-        'color_id',
-        'storage_id',
         'shipping_id',
         'quantity',
         'total_amount',
@@ -21,22 +19,11 @@ class Order extends Model
         'phone',
         'payment_status',
         'payment_method',
-        'status'
+        'status',
+        'inquiry_details'
     ];
 
-    public function products() {
-        return $this->hasMany(Product::class);
-    }
-
-    public function user() {
-        return $this->belongsTo(User::class);
-    }
-
-    public function shipping() {
-        return $this->belongsTo(Shipping::class);
-    }
-
-    public function storage() {
-        return $this->belongsTo(Storage::class);
+    public function orderItems(): HasMany {
+        return $this->hasMany(OrderItem::class);
     }
 }

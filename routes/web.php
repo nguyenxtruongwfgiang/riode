@@ -7,16 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
 include(base_path('routes/auth.php'));
 include(base_path('routes/admin.php'));
 
@@ -46,4 +37,5 @@ Route::middleware('auth')->group(function() {
     Route::post('cart/update{cart}', [CartController::class, 'update'])->name('cart.update');
     Route::post('cart/apply-coupon', [CartController::class, 'applyCoupon'])->name('coupon.apply');
     Route::get('checkout', [OrderController::class, 'index'])->name('checkout.index');
+    Route::post('order/store', [OrderController::class, 'store'])->name('order.store');
 });

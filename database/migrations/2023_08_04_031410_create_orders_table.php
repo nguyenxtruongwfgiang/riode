@@ -14,11 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('product_id');
-            $table->foreignId('color_id');
             $table->foreignId('shipping_id');
-            $table->foreignId('storage_id');
-            $table->integer('quantity');
             $table->float('total_amount');
             $table->text('address');
             $table->string('phone');

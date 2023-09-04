@@ -87,7 +87,8 @@
                                                         height="315">
                                                 </a>
                                                 <div class="product-action-vertical">
-                                                    <button style="cursor: pointer" type="submit" class="btn-product-icon"
+                                                    <button @if ($product->quantity < 1) 'disabled' @endif
+                                                        style="cursor: pointer" type="submit" class="btn-product-icon"
                                                         data-toggle="modal" data-target="#addCartModal"
                                                         title="Add to cart"><i class="d-icon-bag"></i></button>
                                                     <a href="#" class="btn-product-icon btn-wishlist"
