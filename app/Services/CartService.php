@@ -19,7 +19,7 @@ class CartService
             return $carts;
         }
 
-        return 0;
+        return [];
     }
 
     public function getTotalAmount()

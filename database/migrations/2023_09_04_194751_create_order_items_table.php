@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('storage_id');
             $table->foreignId('color_id');
             $table->integer('quantity');
-            $table->float('total_amount');
+            $table->bigInteger('total_amount');
             $table->timestamps();
         });
     }

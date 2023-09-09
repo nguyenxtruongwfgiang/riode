@@ -108,7 +108,7 @@
 
                             <div class="cart-action">
                                 <a href="{{ route('cart.index') }}" class="btn btn-dark btn-link">View Cart</a>
-                                <a href="checkout.html" class="btn btn-dark"><span>Go To Checkout</span></a>
+                                <a href="{{ route('checkout.index') }}" class="btn btn-dark"><span>Go To Checkout</span></a>
                             </div>
                         @else
                             <div class="cart-action">

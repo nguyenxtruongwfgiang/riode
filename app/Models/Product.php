@@ -33,4 +33,8 @@ class Product extends Model
     public function storages() {
         return $this->belongsToMany(Storage::class, 'product_has_storages', 'product_id', 'storage_id');
     }
+
+    public function orderItems() {
+        return $this->belongsToMany(OrderItem::class);
+    }
 }

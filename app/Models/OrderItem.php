@@ -17,4 +17,16 @@ class OrderItem extends Model
         'quantity',
         'total_amount'
     ];
+
+    public function product() {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function color() {
+        return $this->belongsTo(Color::class);
+    }
+
+    public function storage() {
+        return $this->belongsTo(Storage::class);
+    }
 }

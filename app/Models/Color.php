@@ -18,4 +18,8 @@ class Color extends Model
     public function products():BelongsToMany {
         return $this->belongsToMany(Product::class);
     }
+
+    public function orderItems() {
+        return $this->belongsToMany(OrderItem::class);
+    }
 }

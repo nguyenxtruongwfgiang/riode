@@ -19,17 +19,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-// Route::as('client.')->group(function () {
-
-    Route::get('/', [ProductController::class, 'index'])->name('dashboard');
-    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-    Route::get('/categories/{category_id}/products', [ProductController::class, 'getProductByCategory'])->name('products.category');
-    Route::get('products/{product}', [ProductController::class, 'show'])->name('products.detail');
-// });
-Route::middleware('auth')->group(function() {
-
     Route::post('cart/add/{product}', [CartController::class, 'store'])->name('cart.add');
     Route::get('cart', [CartController::class, 'index'])->name('cart.index');
     Route::get('checkout', [OrderController::class, 'index'])->name('checkout.index');
@@ -38,4 +27,13 @@ Route::middleware('auth')->group(function() {
     Route::post('cart/apply-coupon', [CartController::class, 'applyCoupon'])->name('coupon.apply');
     Route::get('checkout', [OrderController::class, 'index'])->name('checkout.index');
     Route::post('order/store', [OrderController::class, 'store'])->name('order.store');
+});
+
+
+Route::get('/', [ProductController::class, 'index'])->name('dashboard');
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/categories/{category_id}/products', [ProductController::class, 'getProductByCategory'])->name('products.category');
+Route::get('products/{product}', [ProductController::class, 'show'])->name('products.detail');
+Route::get('mail', function() {
+    return view('mails.send-confirmation-order-mail');
 });
