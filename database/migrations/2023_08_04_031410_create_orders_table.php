@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('shipping_id');
-            $table->float('total_amount');
+            $table->bigInteger('total_amount');
             $table->text('address');
             $table->string('phone');
             $table->enum('payment_status', ['paid', 'unpaid'])->default('unpaid');

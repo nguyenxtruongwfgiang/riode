@@ -22,12 +22,19 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id'           => 'required',
-            'shipping_id'       => 'required',
-            'total_amount'      => 'required',
             'address'           => 'required',
-            'phone'             => 'required',
-            'inquiry_details'   => 'nullable'
+            'phone'             => ['required', 'regex:/^(0|\+84)\d{9,10}$/'],
+            'inquiry_details'   => 'nullable',
+            'payment_method'    => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'phone.required' => 'Please enter your phone number',
+            'address.required' => 'Please enter your address',
+            'payment_method.required' => 'Please select payment method'
         ];
     }
 }

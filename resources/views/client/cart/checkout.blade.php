@@ -52,19 +52,20 @@
                             <label>Email Address *</label>
                             <input type="text" class="form-control" value="{{ $user->email }}" required />
                             <label> Address *</label>
-                            <input type="text" class="form-control" name="address"/>
+                            <input type="text" class="form-control" name="address" value="{{ old('address') }}" />
                             @error('address')
                                 <label style="color: red; margin-bottom: 1rem">{{ $message }}</label>
                             @enderror
                             <label>Phone Number *</label>
-                            <input type="text" class="form-control" name="phone" id="">
+                            <input type="text" class="form-control" name="phone" id=""
+                                value="{{ old('phone') }}">
                             @error('phone')
                                 <label style="color: red; margin-bottom: 1rem">{{ $message }}</label>
                             @enderror
                             <h2 class="title title-simple text-uppercase text-left">Additional Information</h2>
                             <label>Order Notes (Optional)</label>
                             <textarea class="form-control pb-2 pt-2 mb-0" name="inquiry_details" cols="30" rows="5"
-                                placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+                                placeholder="Notes about your order, e.g. special notes for delivery">{{ old('inquiry_details') }}</textarea>
                         </div>
                         <aside class="col-lg-5 sticky-sidebar-wrapper">
                             <div class="sticky-sidebar mt-1" data-sticky-options="{'bottom': 50}">
@@ -80,11 +81,12 @@
                                         <tbody>
                                             @foreach ($cartItems as $cart)
                                                 <tr>
-                                                    <td class="product-name">{{ $cart->product->name }}<span
+                                                    <td class="product-name">
+                                                        {{ $cart->product->name . ' ' . $cart->color->display_name . ' - ' . $cart->storage->name }}<span
                                                             class="product-quantity">×&nbsp;{{ $cart->quantity }}</span>
                                                     </td>
                                                     <td class="product-total text-body">
-                                                        {{ number_format($cart->product->price) . 'đ' }}</td>
+                                                        {{ number_format($cart->amount) . 'đ' }}</td>
                                                 </tr>
                                             @endforeach
                                             <tr class="summary-subtotal">
@@ -95,32 +97,16 @@
                                                     {{ number_format($totalAmount) . 'đ' }}
                                                 </td>
                                             </tr>
-                                            <tr class="summary-subtotal">
-                                                <td>
-                                                    <h4 class="summary-subtitle">You save</h4>
-                                                </td>
-                                                <td class="summary-subtotal-price pb-0 pt-0">
-                                                    {{ number_format(Session::get('coupon')['value']) . 'đ' }}
-                                                </td>
-                                            </tr>
-                                            <tr class="sumnary-shipping shipping-row-last">
-                                                <td colspan="2">
-                                                    <h4 class="summary-subtitle">Calculate Shipping</h4>
-                                                    <ul>
-                                                        @foreach ($shippingMethods as $shipping)
-                                                            <li>
-                                                                <div class="custom-radio">
-                                                                    <input type="radio" id="shipping-{{ $shipping->id }}"
-                                                                        name="shipping_id"
-                                                                        data-price="{{ $shipping->price }}">
-                                                                    <label class="custom-control-label"
-                                                                        for="shipping-{{ $shipping->id }}">{{ $shipping->type }}</label>
-                                                                </div>
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                </td>
-                                            </tr>
+                                            @if (Session::has('coupon'))
+                                                <tr class="summary-subtotal">
+                                                    <td>
+                                                        <h4 class="summary-subtitle">You save</h4>
+                                                    </td>
+                                                    <td class="summary-subtotal-price pb-0 pt-0">
+                                                        {{ number_format(Session::get('coupon')['value']) . 'đ' }}
+                                                    </td>
+                                                </tr>
+                                            @endif
                                             @if (Session::has('coupon'))
                                                 <tr class="summary-total">
                                                     <td class="pb-0">
@@ -148,38 +134,37 @@
                                     <div class="payment accordion radio-type">
                                         <h4 class="summary-subtitle ls-m pb-3">Payment Methods</h4>
                                         <div class="card">
-                                            <div class="card-header">
-                                                <a href="#collapse1" class="collapse text-body text-normal ls-m">Check
-                                                    payments
-                                                </a>
-                                            </div>
-                                            <div id="collapse1" class="expanded" style="display: block;">
-                                                <div class="card-body ls-m">
-                                                    Please send a check to Store Name, Store Street,
-                                                    Store Town, Store State / County, Store Postcode.
-                                                </div>
+                                            <div class="custom-radio">
+                                                <input type="radio" id="cash_on_delivery" name="payment_method"
+                                                    value="cash_on_delivery"
+                                                    {{ old('payment_method') == 'cash_on_delivery' ? 'checked' : '' }}>
+                                                <label class="custom-control-label" for="cash_on_delivery">Cash on
+                                                    delivery</label>
                                             </div>
                                         </div>
                                         <div class="card">
-                                            <div class="card-header">
-                                                <a href="#collapse2" class="expand text-body text-normal ls-m">Cash
-                                                    on delivery</a>
-                                            </div>
-                                            <div id="collapse2" class="collapsed">
-                                                <div class="card-body ls-m">
-                                                    Pay with cash upon delivery.
-                                                </div>
+                                            <div class="custom-radio">
+                                                <input type="radio" id="banking" name="payment_method"
+                                                    value="banking"
+                                                    {{ old('payment_method') == 'banking' ? 'checked' : '' }}>
+                                                <label class="custom-control-label" for="banking">
+                                                    Online banking
+                                                </label>
                                             </div>
                                         </div>
+                                        @error('payment_method')
+                                            <span style="color: red">{{ $message }}</span>
+                                        @enderror
                                     </div>
-                                    <button type="submit" class="btn btn-dark btn-rounded btn-order">Place
-                                        Order</button>
                                 </div>
+                                <button type="submit" class="btn btn-dark btn-rounded btn-order">Place
+                                    Order</button>
                             </div>
-                        </aside>
                     </div>
-                </form>
+                    </aside>
             </div>
+            </form>
+        </div>
         </div>
     </main>
 @endsection

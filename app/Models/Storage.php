@@ -26,4 +26,8 @@ class Storage extends Model
     public function carts(): HasMany {
         return $this->hasMany(Cart::class);
     }
+
+    public function orderItems() {
+        return $this->belongsToMany(OrderItem::class);
+    }
 }

@@ -86,7 +86,7 @@
                     <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-cards-outline"></i> <span>
                             Order </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                     <ul class="list-unstyled">
-                        <li><a href="#">Order List</a></li>
+                        <li><a href="{{ route('admin.orders.index') }}">Order List</a></li>
                     </ul>
                 </li>
             </ul>
