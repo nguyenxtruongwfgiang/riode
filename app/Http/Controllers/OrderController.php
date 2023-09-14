@@ -74,7 +74,7 @@ class OrderController extends Controller
                 $orderItem->quantity = $cart->quantity;
                 $orderItem->total_amount = $cart->amount;
                 $orderItem->save();
-                // $cart->delete();
+                $cart->delete();
             }
 
             event(new OrderCreated($orderData));
@@ -117,5 +117,19 @@ class OrderController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function cancelOrder(Request $request, Order $order) {
+        try{
+            $order->update([
+                'status' => 'canceled'
+            ]);
+
+            return back()->with('message', 'Order Status Updated Successfully');
+        }catch(\Exception $exception) {
+            Log::error('ProfileController@cancelOrder: ' [$exception->getMessage()]);
+
+            return back()->with('message', 'Order Status Update Failed');
+        }
     }
 }

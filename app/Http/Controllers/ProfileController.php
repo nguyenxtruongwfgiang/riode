@@ -3,14 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+
+    public function index(Request $request): View {
+        $user = $request->user();
+
+        return view('client.account.index', [
+            'user' => $user,
+            'orders' => $user->orders
+        ]);
+    }
+
     /**
      * Display the user's profile form.
      */

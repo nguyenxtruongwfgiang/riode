@@ -10,7 +10,7 @@
                 <a href="contact-us.html" class="contact d-lg-show"><i class="d-icon-map"></i>Contact</a>
                 <a href="#" class="help d-lg-show"><i class="d-icon-info"></i> Need Help</a>
                 @auth
-                    <a href="{{ route('profile.edit') }}">Profile</a>
+                    <a href="{{ route('profile.index') }}">Profile</a>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <a style="cursor: pointer"

@@ -16,7 +16,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('cart/add/{product}', [CartController::class, 'store'])->name('cart.add');
@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::post('cart/apply-coupon', [CartController::class, 'applyCoupon'])->name('coupon.apply');
     Route::get('checkout', [OrderController::class, 'index'])->name('checkout.index');
     Route::post('order/store', [OrderController::class, 'store'])->name('order.store');
+    Route::post('order/cancel/{order}', [OrderController::class, 'cancelOrder'])->name('order.cancel');
 });
 
 
