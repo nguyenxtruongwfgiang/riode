@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\OrderCreated;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Resources\OrderResource;
+use App\Mail\ConfirmationOrderMail;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\User;
@@ -13,6 +14,7 @@ use App\Services\OrderService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
@@ -74,10 +76,10 @@ class OrderController extends Controller
                 $orderItem->quantity = $cart->quantity;
                 $orderItem->total_amount = $cart->amount;
                 $orderItem->save();
-                $cart->delete();
+                // $cart->delete();
             }
 
-            event(new OrderCreated($orderData));
+            Mail::to($request->user())->send(new ConfirmationOrderMail($orderData));
 
             return view('client.cart.order-complete', compact('orderData'));
         } catch (\Exception $exception) {

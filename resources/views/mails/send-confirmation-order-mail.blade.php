@@ -46,31 +46,30 @@
     <table>
         <tr>
             <th>Order Number.</th>
-            <td>ACBCBA</td>
+            <td>{{ $order->id }}</td>
         </tr>
         <tr>
             <th>Order Items.</th>
-            <td>3 items</td>
+            <td>{{ count($order->orderItems) }} items</td>
         </tr>
-        <tr>
-            <th>お問い合わせ区分</th>
-            <td>ABCBCABCB</td>
-        </tr>
-        <tr>
-            <th>お名前</th>
-            <td>ABCBCA</td>
-        </tr>
+        @foreach ($order->orderItems as $item)
+            <tr>
+                <th>{{ $item->product->name }}</th>
+                <td>{{ $item->color->display_name . ' x ' . $item->quantity . ' ' . $item->storage->name }}</td>
+            </tr>
+        @endforeach
+
         <tr>
             <th>Payment method.</th>
-            <td>Cash on delivery</td>
+            <td>{{ $order->payment_method_name }}</td>
         </tr>
         <tr>
             <th>Order at.</th>
-            <td>ACBCBA</td>
+            <td>{{ $order->ordered_at }}</td>
         </tr>
         <tr>
             <th>Total amount</th>
-            <td>1,232,413đ</td>
+            <td>{{ number_format($order->total_amount) }}</td>
         </tr>
     </table>
     <br />
