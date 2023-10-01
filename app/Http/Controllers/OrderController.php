@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\OrderCreated;
 use App\Http\Requests\StoreOrderRequest;
-use App\Http\Resources\OrderResource;
 use App\Mail\ConfirmationOrderMail;
+use App\Mail\OrderCanceled;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\User;
 use App\Services\CartService;
 use App\Services\OrderService;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -58,8 +56,7 @@ class OrderController extends Controller
             $order->user_id = auth()->user()->id;
             $order->total_amount = $this->orderService->getTotalAmount();
             $order->save();
-            // dd($order->payment_status);
-            // $user->carts()->delete();
+
             if(Session::has('coupon')) {
                 Session::forget('coupon');
             }
@@ -127,9 +124,11 @@ class OrderController extends Controller
                 'status' => 'canceled'
             ]);
 
+            Mail::to($request->user())->send(new OrderCanceled($order));
+
             return back()->with('message', 'Order Status Updated Successfully');
         }catch(\Exception $exception) {
-            Log::error('ProfileController@cancelOrder: ' [$exception->getMessage()]);
+            Log::error('ProfileController@cancelOrder: ', [$exception->getMessage()]);
 
             return back()->with('message', 'Order Status Update Failed');
         }
